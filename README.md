@@ -1,4 +1,4 @@
-# Sonarqube stack
+# Sonarqube Stack
 
 A ideia deste stack é prover uma versão offline do Sonarqube com plugins atualizados para a execução de análises de códigos Java e Javascript, além de permitir a análise de verificação de dependências.
 

@@ -32,5 +32,4 @@ Dependendo do seu ambiente de trabalho, você precisará configurar alguns itens
 Execute o script "install.bat" para que a aplicação Sonarqube seja instalada em sua estação. Aguarde o término do processo. Após, você poderá acessar a interface web do Sonarqube pelo endereço http://localhost:9000, e se autenticar usando tanto como usuário e senha "*admin*".
 <br>
 <br>
-<br>
 O pacote foi construído e testado num ambiente com Windows 10 Pro, com os requisitos acima instalados e configurados. Porém, o mesmo pode ser executado num ambiente Linux nativo sem nenhuma ou com poucas alterações.
