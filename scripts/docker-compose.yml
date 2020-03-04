@@ -1,0 +1,43 @@
+version: '3.5'
+networks:
+  NW_SONAR:
+    name: NW_SONAR
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      -
+        subnet: 172.45.0.0/16
+
+services:
+
+  lcl-sonar:
+    image: "bradesco/sonarqube:latest"
+    container_name: lcl-sonar
+    hostname: lcl-sonar
+    restart: "always"
+    environment:
+      SONARQUBE_JDBC_USERNAME: sonar
+      SONARQUBE_JDBC_PASSWORD: sonar
+      SONARQUBE_JDBC_URL: jdbc:postgresql://lcl-postgresql/sonarqube
+      sonar.web.javaOpts: "-Xmx512m -Xms512m"
+      sonar.ce.javaOpts: "-Xmx512m -Xms512m"
+      sonar.search.javaOpts: "-Xmx1024m -Xms1024m"
+    depends_on:
+      - lcl-postgresql
+    ports:
+      - "9000:9000"
+    networks:
+      NW_SONAR:
+
+  lcl-postgresql:
+    image: postgres:alpine
+    container_name: lcl-postgresql
+    hostname: lcl-postgresql
+    restart: "always"
+    environment:
+      POSTGRES_USER: sonar
+      POSTGRES_PASSWORD: sonar
+      POSTGRES_DB: sonarqube
+    networks:
+      NW_SONAR:

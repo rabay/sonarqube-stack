@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head><title></title></head><body><h1 id="guia-de-instala-o">Guia de Instalação</h1>
+<p>Descompacte o arquivo &quot;sonar-package.tar.gz&quot; em um diretório e o use como diretório de trabalho. Siga os passos abaixo.</p>
+<ol>
+<li><p><strong>Habilitar o Hyper-V</strong><br>Execute o script &quot;scripts/EnableHyperV.bat&quot; como administrador para habilitar o Hyper-V em sua estação Windows 10 Pro. Após a execução, reinicie seu computador. Caso esteja executando esta solução num ambiente Linux, este passo é desnecessário.  </p>
+</li>
+<li><p><strong>Instalar o Docker Desktop / Docker Engine</strong><br>No Windows, você precisará ter o Docker Desktop instalado para poder executar os containeres desta solução. Para isso, baixe o instalador <a href="https://download.docker.com/win/stable/Docker%20Desktop%20Installer.exe">aqui</a> e o execute. Siga os passos apresentados na tela e, ao término, reinicie seu computador. No Linux, instale o Docker Engine de acordo com sua distribuição. Neste <a href="https://docs.docker.com/install/">link</a> você terá mais informações de como fazer isso.</p>
+</li>
+<li><p><strong>Configure o Docker Desktop</strong><br>Dependendo do seu ambiente de trabalho, você precisará configurar alguns itens em sua instalação do Docker. Para acessar a área de configurações do Docker for Windows, clique com o botão direito no ícone da aplicação na bandeja do sistema e depois escolha a opção &quot;Settings&quot;.</p>
+<ul>
+<li><em>Proxy</em><br>Caso acesse à internet através de um proxy, você precisará informá-lo ao Docker para que ele consiga acessar os repositórios de imagens de containeres. Você insere essa informação na opção &quot;Proxies&quot; da tela de configuração do Docker for Desktop. Talvez precise configurar um proxy local alternativo caso faça uso de um proxy corporativo com autenticação NTLM. Neste <a href="http://www.rabay.net/2020/03/instalando-e-configurando-o-cntlm-no.html">artigo</a> você poderá ver como instalar o <a href="http://cntlm.sourceforge.net">CNTLM</a> e contornar essa situação.</li>
+<li><p><em>Daemon</em><br>Recomenda-se inserir o exemplo abaixo como código base abaixo, para limitar o tamanho e a quantidade de arquivos de log gerados pelos containeres. Acesse a área &quot;Daemon&quot; da tela de configurações, altere o modo de edição de &quot;Basic&quot; para &quot;Advanced&quot; e cole o bloco de texto abaixo na área indicada. Clique em &quot;Apply&quot; quando concluir.</p>
+<pre><code>  {
+      <span class="hljs-attr">"registry-mirrors"</span>: [],  
+      <span class="hljs-attr">"insecure-registries"</span>: [],  
+      <span class="hljs-attr">"debug"</span>: <span class="hljs-literal">true</span>,  
+      <span class="hljs-attr">"experimental"</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">"log-driver"</span>: <span class="hljs-string">"json-file"</span>,
+      <span class="hljs-attr">"log-opts"</span>: {
+          <span class="hljs-attr">"max-size"</span>: <span class="hljs-string">"10m"</span>,
+          <span class="hljs-attr">"max-file"</span>: <span class="hljs-string">"3"</span>
+      }
+  }  
+</code></pre></li>
+</ul>
+</li>
+<li><p><strong>Instalar a aplicação do pacote</strong><br>Execute o script &quot;install.bat&quot; para que a aplicação Sonarqube seja instalada em sua estação. Aguarde o término do processo. Após, você poderá acessar a interface web do Sonarqube pelo endereço <a href="http://localhost:9000">http://localhost:9000</a>, e se autenticar usando tanto como usuário e senha &quot;<em>admin</em>&quot;.
+<br>
+<br>
+<br>
+O pacote foi construído e testado num ambiente com Windows 10 Pro, com os requisitos acima instalados e configurados. Porém, o mesmo pode ser executado num ambiente Linux nativo sem nenhuma ou com poucas alterações.</p>
+</li>
+</ol>
+</body></html>
