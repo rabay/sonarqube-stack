@@ -1,6 +1,6 @@
 FROM openjdk:11-jre-slim
 
-LABEL maintainer="Victor Rabay <victor.rabay@bradesco.com.br>"
+LABEL maintainer="Victor Rabay <victor.rabay@gmail.com>"
 
 RUN apt-get update \
     && apt-get install -y apt-utils \
@@ -99,9 +99,6 @@ COPY resources/run.sh $SONARQUBE_HOME/bin/run.sh
 COPY resources/healthcheck.sh $SONARQUBE_HOME/bin/healthcheck.sh
 COPY resources/config.sh $SONARQUBE_HOME/bin/config.sh
 
-# VOLUME "$SONARQUBE_HOME/data"
-# VOLUME "$SONARQUBE_HOME/conf"
-
 HEALTHCHECK CMD $SONARQUBE_HOME/bin/healthcheck.sh
 
 WORKDIR $SONARQUBE_HOME
@@ -115,23 +112,3 @@ RUN set -x \
 USER sonarqube
 
 ENTRYPOINT ["./bin/run.sh"] 
-
-
-# docker run -it --rm --name lclsonar -p 9000:9000 -e SONARQUBE_PROXY_HOST="cntlm" -e SONARQUBE_PROXY_PORT="3128" vrabay/sonarqube
-# docker run -it --rm --name lclsonar -p 9000:9000 -e http.proxyHost="lclcntlm" -e http.proxyPort="3128" vrabay/sonarqube
-
-# docker run -it --rm \
-# --name lclsonar \
-# --net lclnet \
-# --ip 172.45.0.19 \
-# -p 9000:9000 \
-# vrabay/sonarqube
-
-# docker run -d --name lclsonar -p 9000:9000 vrabay/sonarqube:latest
-
-# sonar.updatecenter.activate=true
-# http.proxyHost=<host>
-# http.proxyPort=<port>
-# http.proxyUser=<username>
-# http.proxyPassword=<password>
-# sonar.web.javaAdditionalOpts=-Dhttps.proxyHost=xxxxx -Dhttps.proxyPort=xxxx -Dhttps.proxyUser=xxxx -Dhttps.proxyPassword=xxxx

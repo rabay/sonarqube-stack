@@ -12,7 +12,7 @@ networks:
 services:
 
   lcl-sonar:
-    image: "bradesco/sonarqube:latest"
+    image: "rabay/sonarqube-stack:latest"
     container_name: lcl-sonar
     hostname: lcl-sonar
     restart: "always"

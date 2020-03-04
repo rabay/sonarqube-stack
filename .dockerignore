@@ -1,4 +1,5 @@
 package/
 scripts/
 docs/
+resources/*.exe
 .gitignore
