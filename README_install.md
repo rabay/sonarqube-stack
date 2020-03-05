@@ -1,6 +1,6 @@
 # Guia de Instalação
 
-Descompacte o arquivo "sonar-package.tar.gz" em um diretório e o use como diretório de trabalho. Siga os passos abaixo.
+Faça o download [aqui](https://github.com/rabay/sonarqube-stack/releases) e descompacte o arquivo zip em um diretório e o use como diretório de trabalho. Siga os passos abaixo.
 
 1. **Habilitar o Hyper-V**  
 Execute o script "scripts/EnableHyperV.bat" como administrador para habilitar o Hyper-V em sua estação Windows 10 Pro. Após a execução, reinicie seu computador. Caso esteja executando esta solução num ambiente Linux, este passo é desnecessário.  

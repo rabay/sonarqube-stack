@@ -3,3 +3,4 @@ docs/
 resources/**/*.jar
 resources/**/*.gz
 resources/**/*.exe
+*.html
