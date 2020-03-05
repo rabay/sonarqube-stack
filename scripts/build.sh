@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# docker build -t rabay/sonarqube-stack:latest ../
+docker build -t rabay/sonarqube-stack:latest ../
 
 PACKAGE_DIR=../package
 
