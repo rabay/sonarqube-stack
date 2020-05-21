@@ -21,7 +21,8 @@ ENV SONAR_VERSION="6.7.7" \
     PLGN_JAVA_VRSN="5.13.0.18197" \
     PLGN_JVSCRPT_VRSN="3.2.0.5506" \
     PLGN_KTLN_VRSN="1.5.0.315" \
-    PLGN_TYPSCRPT_VRSN="1.1.0.1079"
+    PLGN_TYPSCRPT_VRSN="1.1.0.1079" \
+    PLGN_FNDBGS_VRSN="3.7.0"
 
 # Http port
 EXPOSE 9000
@@ -55,7 +56,8 @@ RUN set -x \
     && rm -rf $SONARQUBE_HOME/extensions/plugins/*checkstyle*.jar \
     && rm -rf $SONARQUBE_HOME/extensions/plugins/*java*.jar \
     && rm -rf $SONARQUBE_HOME/extensions/plugins/*javascript*.jar \
-    && rm -rf $SONARQUBE_HOME/extensions/plugins/*kotlin*.jar
+    && rm -rf $SONARQUBE_HOME/extensions/plugins/*kotlin*.jar \
+    && rm -rf $SONARQUBE_HOME/extensions/plugins/*findbugs*.jar
 
 #     && rm -rf $SONARQUBE_HOME/extensions/plugins/*pmd*.jar \
 #     && rm -rf $SONARQUBE_HOME/extensions/plugins/*ansible*.jar \
@@ -63,7 +65,6 @@ RUN set -x \
 #     && rm -rf $SONARQUBE_HOME/extensions/plugins/*css*.jar \
 #     && rm -rf $SONARQUBE_HOME/extensions/plugins/*flex*.jar \
 #     && rm -rf $SONARQUBE_HOME/extensions/plugins/*go-plugin*.jar \
-#     && rm -rf $SONARQUBE_HOME/extensions/plugins/*findbugs*.jar \
 #     && rm -rf $SONARQUBE_HOME/extensions/plugins/*html*.jar \
 #     && rm -rf $SONARQUBE_HOME/extensions/plugins/*php*.jar \
 #     && rm -rf $SONARQUBE_HOME/extensions/plugins/*yaml*.jar \
@@ -79,7 +80,9 @@ RUN set -x \
     && curl -o $SONARQUBE_HOME/extensions/plugins/sonar-java-plugin.jar -fSL https://binaries.sonarsource.com/Distribution/sonar-java-plugin/sonar-java-plugin-$PLGN_JAVA_VRSN.jar \
     && curl -o $SONARQUBE_HOME/extensions/plugins/sonar-typescript-plugin.jar -fSL https://binaries.sonarsource.com/Distribution/sonar-typescript-plugin/sonar-typescript-plugin-$PLGN_TYPSCRPT_VRSN.jar \
     && curl -o $SONARQUBE_HOME/extensions/plugins/sonar-javascript-plugin.jar -fSL https://binaries.sonarsource.com/Distribution/sonar-javascript-plugin/sonar-javascript-plugin-$PLGN_JVSCRPT_VRSN.jar \
-    && curl -o $SONARQUBE_HOME/extensions/plugins/sonar-kotlin-plugin.jar -fSL https://binaries.sonarsource.com/Distribution/sonar-kotlin-plugin/sonar-kotlin-plugin-$PLGN_KTLN_VRSN.jar    
+    && curl -o $SONARQUBE_HOME/extensions/plugins/sonar-kotlin-plugin.jar -fSL https://binaries.sonarsource.com/Distribution/sonar-kotlin-plugin/sonar-kotlin-plugin-$PLGN_KTLN_VRSN.jar \
+    && curl -o $SONARQUBE_HOME/extensions/plugins/sonar-findbugs-plugin.jar -fSL https://github.com/spotbugs/sonar-findbugs/releases/download/$PLGN_FNDBGS_VRSN/sonar-findbugs-plugin-$PLGN_FNDBGS_VRSN.jar \
+    && chown -R sonarqube:sonarqube $SONARQUBE_HOME/extensions/plugins/
 
 #     && curl -o $SONARQUBE_HOME/extensions/plugins/sonar-checkstyle-plugin.jar -fSL https://github.com/checkstyle/sonar-checkstyle/releases/download/4.29/checkstyle-sonar-plugin-4.29.jar \
 #     && curl -o $SONARQUBE_HOME/extensions/plugins/sonar-pmd-plugin.jar -fSL https://github.com/jensgerdes/sonar-pmd/releases/download/3.2.1/sonar-pmd-plugin-3.2.1.jar \
@@ -88,7 +91,6 @@ RUN set -x \
 #     && curl -o $SONARQUBE_HOME/extensions/plugins/sonar-css-plugin.jar -fSL https://binaries.sonarsource.com/Distribution/sonar-css-plugin/sonar-css-plugin-1.2.0.1325.jar \
 #     && curl -o $SONARQUBE_HOME/extensions/plugins/sonar-flex-plugin.jar -fSL https://binaries.sonarsource.com/Distribution/sonar-flex-plugin/sonar-flex-plugin-2.5.1.1831.jar \
 #     && curl -o $SONARQUBE_HOME/extensions/plugins/sonar-go-plugin.jar -fSL https://binaries.sonarsource.com/Distribution/sonar-go-plugin/sonar-go-plugin-1.6.0.719.jar \
-#     && curl -o $SONARQUBE_HOME/extensions/plugins/sonar-findbugs-plugin.jar -fSL https://github.com/spotbugs/sonar-findbugs/releases/download/3.11.1/sonar-findbugs-plugin-3.11.1.jar \
 #     && curl -o $SONARQUBE_HOME/extensions/plugins/sonar-html-plugin.jar -fSL https://binaries.sonarsource.com/Distribution/sonar-html-plugin/sonar-html-plugin-3.2.0.2082.jar \
 #     && curl -o $SONARQUBE_HOME/extensions/plugins/sonar-php-plugin.jar -fSL https://binaries.sonarsource.com/Distribution/sonar-php-plugin/sonar-php-plugin-3.3.0.5166.jar \
 #     && curl -o $SONARQUBE_HOME/extensions/plugins/sonar-yaml-plugin.jar -fSL https://github.com/sbaudoin/sonar-yaml/releases/download/v1.5.1/sonar-yaml-plugin-1.5.1.jar \
@@ -98,7 +100,6 @@ RUN set -x \
 #     && curl -o $SONARQUBE_HOME/extensions/plugins/sonar-vbnet-plugin.jar -fSL https://binaries.sonarsource.com/Distribution/sonar-vbnet-plugin/sonar-vbnet-plugin-8.3.0.14607.jar \
 #     && curl -o $SONARQUBE_HOME/extensions/plugins/sonar-xml-plugin.jar -fSL https://binaries.sonarsource.com/Distribution/sonar-xml-plugin/sonar-xml-plugin-2.0.1.2020.jar \
 #     && curl -o $SONARQUBE_HOME/extensions/plugins/sonar-dependency-check-plugin.jar -fSL https://github.com/dependency-check/dependency-check-sonar-plugin/releases/download/2.0.4/sonar-dependency-check-plugin-2.0.4.jar \
-#     && chown -R sonarqube:sonarqube $SONARQUBE_HOME/extensions/plugins/
 
 RUN ls -lha $SONARQUBE_HOME/extensions/plugins/
 
