@@ -23,7 +23,8 @@ QG_ERROR_4="A"
 
 #Quality Profiles
 QP_JAVA_LANGUAGE_ID="java"
-QP_JAVA_DEFAULT_PROFILE="FindBugs+%2B+FB-Contrib"
+# QP_JAVA_DEFAULT_PROFILE="FindBugs+%2B+FB-Contrib"
+QP_JAVA_DEFAULT_PROFILE="Sonar+way"
 QP_TS_LANGUAGE_ID="ts"
 QP_TS_DEFAULT_PROFILE="Sonar+way+recommended"
 QP_JS_LANGUAGE_ID="js"
