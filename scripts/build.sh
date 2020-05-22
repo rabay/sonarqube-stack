@@ -6,7 +6,7 @@ PACKAGE_DIR=../package
 docker build -t rabay/sonarqube-stack:latest -t rabay/sonarqube-stack:v$RELEASE_VRSN ../
 
 ### Gera pacote de release com arquivos de instalação necessários
-zip -D $PACKAGE_DIR/sonar-stack-v$RELEASE_VRSN.zip docker-compose.yml install_dockerhub.sh install_dockerhub.bat
+zip -D $PACKAGE_DIR/sonar-package-v$RELEASE_VRSN.zip docker-compose.yml install_dockerhub.sh install_dockerhub.bat
 
 # echo "Exportando imagens do Docker..."
 # rm -fv sonarqube-latest.tar
