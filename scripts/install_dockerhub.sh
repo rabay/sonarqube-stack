@@ -13,6 +13,9 @@ echo "================================================================"
 echo "Iniciando container Sonarqube..."
 docker-compose -f docker-compose.yml -p sonarstack down --remove-orphans -v
 
+echo "Atualizando imagens a partir do Docker Hub..."
+# docker-compose -f docker-compose.yml -p sonarstack pull
+
 docker-compose -f docker-compose.yml -p sonarstack up -d lcl-postgresql
 echo "Aguardando 10 segundos para a inicializacao do banco de dados..."
 for i in {0..10}; do echo -ne "$i"'\r'; sleep 1; done; echo 

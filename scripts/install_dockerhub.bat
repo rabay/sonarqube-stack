@@ -4,6 +4,9 @@ TITLE Instalando o Sonarqube
 ECHO Iniciando stack do Sonarqube...
 docker-compose -f docker-compose.yml -p sonarstack down --remove-orphans -v
 
+ECHO Atualizando imagens a partir do Docker Hub...
+docker-compose -f docker-compose.yml -p sonarstack pull
+
 ECHO Aguardando a inicializacao do PostgreSQL...
 docker-compose -f docker-compose.yml -p sonarstack up -d lcl-postgresql
 timeout /t 15 /nobreak
