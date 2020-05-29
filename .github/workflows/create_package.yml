@@ -31,3 +31,14 @@ jobs:
       run: |
         cd scripts
         zip -D ../sonar-package.zip docker-compose.yml install_dockerhub.sh install_dockerhub.bat
+        cd ../
+    
+    # Upload binaries 
+    - name: Upload files to a GitHub release
+      uses: svenstaro/upload-release-action@1.0.1
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: sonar-package.zip
+        asset_name: sonar-package
+        tag: ${{ github.ref }}
+        overwrite: true
