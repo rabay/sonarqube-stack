@@ -30,15 +30,27 @@ jobs:
     - name: ZIP and create package
       run: |
         cd scripts
-        zip -D ../sonar-package.zip docker-compose.yml install_dockerhub.sh install_dockerhub.bat
+        zip -D ../sonar-package-${{ github.ref }}.zip docker-compose.yml install_dockerhub.sh install_dockerhub.bat
         cd ../
     
     # Upload binaries 
-    - name: Upload files to a GitHub release
-      uses: svenstaro/upload-release-action@1.0.1
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: sonar-package.zip
-        asset_name: sonar-package
-        tag: ${{ github.ref }}
-        overwrite: true
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: true
+        prerelease: false
+    - name: Upload Release Asset
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+        asset_path: ./sonar-package-${{ github.ref }}.zip
+        asset_name: sonar-package-${{ github.ref }}.zip
+        asset_content_type: application/zip
